@@ -1,0 +1,32 @@
+//Register the resource provider on your subscription
+az provider register -n Microsoft.ContainerService
+
+//Creating a resource group
+az group create --name oss-aks --location eastus
+
+//Creating nodes and generating SSH keys
+az aks create --resource-group oss-aks --name kubelive --node-count 1 --generate-ssh-keys
+
+//Install CLI for k8's - kubectl (avoid this if you are using cloudshell)
+az aks install-cli
+
+//Configure the Kubectl using the below command with certificated and credentials
+az aks get-credentials --resource-group oss-aks --name kubelive
+
+//get the nodes
+kubectl get nodes
+
+//get the health status of the nodes
+kubectl get cs
+
+//get the cluster information
+kubectl cluster-info
+
+//deploy a nginx image
+kubectl run --image=nginx myweb
+
+//get the deployment status
+Kubectl get deploy
+
+//get the pods
+kubectl get pods
